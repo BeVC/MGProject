@@ -11,9 +11,15 @@ namespace MGProject
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        // PLAYER
         Texture2D playerChar;
         Vector2 playerCharPos;
         Vector2 playerCharOrigin;
+
+        // SHEETS
+        Texture2D terrain1Sheet;
+
 
         public Game1()
         {
@@ -49,6 +55,7 @@ namespace MGProject
 
             // TODO: use this.Content to load your game content here
             playerChar = this.Content.Load<Texture2D>("char");
+            terrain1Sheet = this.Content.Load<Texture2D>("terrain1");
         }
 
         /// <summary>
