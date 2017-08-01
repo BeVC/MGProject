@@ -11,6 +11,9 @@ namespace MGProject
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Texture2D playerChar;
+        Vector2 playerCharPos;
+        Vector2 playerCharOrigin;
 
         public Game1()
         {
@@ -29,6 +32,10 @@ namespace MGProject
             // TODO: Add your initialization logic here
 
             base.Initialize();
+            // PUT CHAR CENTER MAP
+            playerCharPos = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2);
+            playerCharOrigin = new Vector2(16, 16);
+
         }
 
         /// <summary>
@@ -41,6 +48,7 @@ namespace MGProject
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            playerChar = this.Content.Load<Texture2D>("char");
         }
 
         /// <summary>
@@ -59,12 +67,34 @@ namespace MGProject
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
+            if (IsActive)
+            {
+                if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                    Exit();
 
-            // TODO: Add your update logic here
+                // TODO: Add your update logic here
 
-            base.Update(gameTime);
+                // KEYBOARD STATE & MOVEMENT
+                KeyboardState state = Keyboard.GetState();
+
+                if (state.IsKeyDown(Keys.Right)) {
+                    playerCharPos.X += 10;
+                }
+                if (state.IsKeyDown(Keys.Left))
+                {
+                    playerCharPos.X -= 10;
+                }
+                if (state.IsKeyDown(Keys.Up))
+                {
+                    playerCharPos.Y -= 10;
+                }
+                if (state.IsKeyDown(Keys.Down))
+                {
+                    playerCharPos.Y += 10;
+                }
+
+                base.Update(gameTime);
+            }
         }
 
         /// <summary>
@@ -76,6 +106,9 @@ namespace MGProject
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            spriteBatch.Begin();
+            spriteBatch.Draw(playerChar, playerCharPos, Color.White);
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
