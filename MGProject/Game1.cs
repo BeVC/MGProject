@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using MGProject.TileEngine;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -20,6 +21,10 @@ namespace MGProject
         // SHEETS
         Texture2D terrain1Sheet;
 
+        // testing
+        Engine engine = new Engine(32, 32);
+        Tileset tileset;
+        TileMap map;
 
         public Game1()
         {
@@ -36,7 +41,7 @@ namespace MGProject
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            IsMouseVisible = true;
             base.Initialize();
             // PUT CHAR CENTER MAP
             playerCharPos = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2);
@@ -56,6 +61,18 @@ namespace MGProject
             // TODO: use this.Content to load your game content here
             playerChar = this.Content.Load<Texture2D>("char");
             terrain1Sheet = this.Content.Load<Texture2D>("terrain1");
+
+            tileset = new Tileset(terrain1Sheet, 2, 1, 32, 32);
+            MapLayer layer = new MapLayer(40, 40);
+            for (int y = 0; y < layer.Height; y++)
+            {
+                for (int x = 0; x < layer.Width; x++)
+                {
+                    Tile tile = new Tile(0, 0);
+                    layer.SetTile(x, y, tile);
+                }
+            }
+            map = new TileMap(tileset, layer);
         }
 
         /// <summary>
@@ -84,7 +101,8 @@ namespace MGProject
                 // KEYBOARD STATE & MOVEMENT
                 KeyboardState state = Keyboard.GetState();
 
-                if (state.IsKeyDown(Keys.Right)) {
+                if (state.IsKeyDown(Keys.Right))
+                {
                     playerCharPos.X += 10;
                 }
                 if (state.IsKeyDown(Keys.Left))
@@ -114,7 +132,10 @@ namespace MGProject
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
+
+            map.Draw(spriteBatch);            
             spriteBatch.Draw(playerChar, playerCharPos, Color.White);
+
             spriteBatch.End();
 
             base.Draw(gameTime);
