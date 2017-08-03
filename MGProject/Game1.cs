@@ -1,4 +1,6 @@
-﻿using MGProject.TileEngine;
+﻿//using MGProject.TileEngine;
+using MGProject.Test;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -21,10 +23,12 @@ namespace MGProject
         // SHEETS
         Texture2D terrain1Sheet;
 
-        // testing
+        // MAP
         Engine engine = new Engine(32, 32);
-        Tileset tileset;
-        TileMap map;
+        TileSet tileset;
+        MapLayer layer1;
+        MapLayer layer2;
+        Map map;
 
         public Game1()
         {
@@ -61,18 +65,12 @@ namespace MGProject
             // TODO: use this.Content to load your game content here
             playerChar = this.Content.Load<Texture2D>("char");
             terrain1Sheet = this.Content.Load<Texture2D>("terrain1");
+            tileset = new TileSet(terrain1Sheet, 2, 1, 32, 32);
+            layer1 = new MapLayer(5, 2, 0, terrain1Sheet.Name);
+            layer2 = new MapLayer(4, 2, 1, terrain1Sheet.Name);
 
-            tileset = new Tileset(terrain1Sheet, 2, 1, 32, 32);
-            MapLayer layer = new MapLayer(40, 40);
-            for (int y = 0; y < layer.Height; y++)
-            {
-                for (int x = 0; x < layer.Width; x++)
-                {
-                    Tile tile = new Tile(0, 0);
-                    layer.SetTile(x, y, tile);
-                }
-            }
-            map = new TileMap(tileset, layer);
+            map = new Map(layer1, tileset);
+            //map.AddMapLayer(layer2);
         }
 
         /// <summary>
@@ -132,8 +130,7 @@ namespace MGProject
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-
-            map.Draw(spriteBatch);            
+            map.Draw(spriteBatch);
             spriteBatch.Draw(playerChar, playerCharPos, Color.White);
 
             spriteBatch.End();
