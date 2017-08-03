@@ -66,11 +66,11 @@ namespace MGProject
             playerChar = this.Content.Load<Texture2D>("char");
             terrain1Sheet = this.Content.Load<Texture2D>("terrain1");
             tileset = new TileSet(terrain1Sheet, 2, 1, 32, 32);
-            layer1 = new MapLayer(5, 2, 0, terrain1Sheet.Name);
-            layer2 = new MapLayer(4, 2, 1, terrain1Sheet.Name);
+            layer1 = new MapLayer(4, 4, 0, terrain1Sheet.Name);
+            layer2 = new MapLayer(4, 4, 1, terrain1Sheet.Name, new Vector2(4,0));
 
             map = new Map(layer1, tileset);
-            //map.AddMapLayer(layer2);
+            map.AddMapLayer(layer2);
         }
 
         /// <summary>

@@ -27,7 +27,8 @@ namespace MGProject.Test
         /// checks if tileset is present before adding to the list
         /// </summary>
         /// <param name="tileSet">the tileset to be added</param>
-        public void AddTileSet(TileSet tileSet) {
+        public void AddTileSet(TileSet tileSet)
+        {
             string tileSetName = tileSet.Image.Name;
             bool setAlreadyPresent = false;
 
@@ -62,6 +63,7 @@ namespace MGProject.Test
                 {
                     destination.X = tile.TileXIndex * 32;
                     destination.Y = tile.TileYIndex * 32;
+
                     spriteBatch.Draw(set.Image, destination, set.GetSpecificSourceRectangle(tile.TilesetIndex), Color.White);
                 }
             }
