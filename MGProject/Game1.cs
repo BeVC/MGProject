@@ -1,5 +1,7 @@
 ﻿//using MGProject.TileEngine;
-using MGProject.Test;
+using MGProject.GameScreens;
+using MGProject.XRpgLib;
+using MGProject.XRpgLib.TileEngine;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,9 +14,22 @@ namespace MGProject
     /// </summary>
     public class Game1 : Game
     {
+        #region MG Field
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        public SpriteBatch spriteBatch;
+        #endregion
 
+        #region Game State
+        GameStateManager stateManager;
+        public TitleScreen titleScreen;
+
+        #region Screen Field 
+        const int screenWidth = 1024;
+        const int screenHeight = 768;
+        public readonly Rectangle screenRectangle;
+        #endregion
+
+        #endregion
         // PLAYER
         Texture2D playerChar;
         Vector2 playerCharPos;
@@ -33,7 +48,19 @@ namespace MGProject
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferWidth = screenWidth;
+            graphics.PreferredBackBufferHeight = screenHeight;
+
+            screenRectangle = new Rectangle(0, 0, screenWidth, screenHeight);
+
             Content.RootDirectory = "Content";
+
+            Components.Add(new InputHandler(this));
+            stateManager = new GameStateManager(this);
+            Components.Add(stateManager);
+
+            titleScreen = new TitleScreen(this, stateManager);
+            stateManager.ChangeState(titleScreen);
         }
 
         /// <summary>

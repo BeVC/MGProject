@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MGProject.Test
+namespace MGProject.XRpgLib.TileEngine
 {
     public class Engine
     {

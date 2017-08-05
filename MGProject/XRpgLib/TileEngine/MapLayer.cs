@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace MGProject.Test
+namespace MGProject.XRpgLib.TileEngine
 {
     public class MapLayer
     {

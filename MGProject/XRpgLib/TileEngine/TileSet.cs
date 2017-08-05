@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace MGProject.Test
+namespace MGProject.XRpgLib.TileEngine
 {
     public class TileSet
     {

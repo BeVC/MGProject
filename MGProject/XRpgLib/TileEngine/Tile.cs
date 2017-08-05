@@ -1,4 +1,4 @@
-﻿namespace MGProject.Test
+﻿namespace MGProject.XRpgLib.TileEngine
 {
     public class Tile
     {

@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 
-namespace MGProject.Test
+namespace MGProject.XRpgLib.TileEngine
 {
     public class Map
     {
