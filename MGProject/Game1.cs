@@ -22,6 +22,8 @@ namespace MGProject
         #region Game State
         GameStateManager stateManager;
         public TitleScreen titleScreen;
+        public StartMenuScreen startMenuScreen;
+        public GamePlayScreen gamePlayScreen;
 
         #region Screen Field 
         const int screenWidth = 1024;
@@ -31,19 +33,19 @@ namespace MGProject
 
         #endregion
         // PLAYER
-        Texture2D playerChar;
-        Vector2 playerCharPos;
-        Vector2 playerCharOrigin;
+        //Texture2D playerChar;
+        //Vector2 playerCharPos;
+        //Vector2 playerCharOrigin;
 
-        // SHEETS
-        Texture2D terrain1Sheet;
+        //// SHEETS
+        //Texture2D terrain1Sheet;
 
-        // MAP
-        Engine engine = new Engine(32, 32);
-        TileSet tileset;
-        MapLayer layer1;
-        MapLayer layer2;
-        Map map;
+        //// MAP
+        //Engine engine = new Engine(32, 32);
+        //TileSet tileset;
+        //MapLayer layer1;
+        //MapLayer layer2;
+        //Map map;
 
         public Game1()
         {
@@ -60,6 +62,9 @@ namespace MGProject
             Components.Add(stateManager);
 
             titleScreen = new TitleScreen(this, stateManager);
+            startMenuScreen = new StartMenuScreen(this, stateManager);
+            gamePlayScreen = new GamePlayScreen(this, stateManager);
+
             stateManager.ChangeState(titleScreen);
         }
 
@@ -75,8 +80,8 @@ namespace MGProject
             IsMouseVisible = true;
             base.Initialize();
             // PUT CHAR CENTER MAP
-            playerCharPos = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2);
-            playerCharOrigin = new Vector2(16, 16);
+            //playerCharPos = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2);
+            //playerCharOrigin = new Vector2(16, 16);
 
         }
 
@@ -90,14 +95,14 @@ namespace MGProject
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            playerChar = this.Content.Load<Texture2D>("char");
-            terrain1Sheet = this.Content.Load<Texture2D>("terrain1");
-            tileset = new TileSet(terrain1Sheet, 2, 1, 32, 32);
-            layer1 = new MapLayer(4, 4, 0, terrain1Sheet.Name);
-            layer2 = new MapLayer(4, 4, 1, terrain1Sheet.Name, new Vector2(4,0));
+            //playerChar = this.Content.Load<Texture2D>("char");
+            //terrain1Sheet = this.Content.Load<Texture2D>("terrain1");
+            //tileset = new TileSet(terrain1Sheet, 2, 1, 32, 32);
+            //layer1 = new MapLayer(4, 4, 0, terrain1Sheet.Name);
+            //layer2 = new MapLayer(4, 4, 1, terrain1Sheet.Name, new Vector2(4,0));
 
-            map = new Map(layer1, tileset);
-            map.AddMapLayer(layer2);
+            //map = new Map(layer1, tileset);
+            //map.AddMapLayer(layer2);
         }
 
         /// <summary>
@@ -124,24 +129,24 @@ namespace MGProject
                 // TODO: Add your update logic here
 
                 // KEYBOARD STATE & MOVEMENT
-                KeyboardState state = Keyboard.GetState();
+                //KeyboardState state = Keyboard.GetState();
 
-                if (state.IsKeyDown(Keys.Right))
-                {
-                    playerCharPos.X += 10;
-                }
-                if (state.IsKeyDown(Keys.Left))
-                {
-                    playerCharPos.X -= 10;
-                }
-                if (state.IsKeyDown(Keys.Up))
-                {
-                    playerCharPos.Y -= 10;
-                }
-                if (state.IsKeyDown(Keys.Down))
-                {
-                    playerCharPos.Y += 10;
-                }
+                //if (state.IsKeyDown(Keys.Right))
+                //{
+                //    playerCharPos.X += 10;
+                //}
+                //if (state.IsKeyDown(Keys.Left))
+                //{
+                //    playerCharPos.X -= 10;
+                //}
+                //if (state.IsKeyDown(Keys.Up))
+                //{
+                //    playerCharPos.Y -= 10;
+                //}
+                //if (state.IsKeyDown(Keys.Down))
+                //{
+                //    playerCharPos.Y += 10;
+                //}
 
                 base.Update(gameTime);
             }
@@ -157,8 +162,8 @@ namespace MGProject
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-            map.Draw(spriteBatch);
-            spriteBatch.Draw(playerChar, playerCharPos, Color.White);
+            //map.Draw(spriteBatch);
+            //spriteBatch.Draw(playerChar, playerCharPos, Color.White);
 
             spriteBatch.End();
 
